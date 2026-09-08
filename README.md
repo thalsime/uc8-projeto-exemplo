@@ -63,6 +63,11 @@ npx tsc --noEmit
 npx expo-doctor
 ```
 
+## Links úteis
+
+Os sites oficiais de cada tecnologia da unidade, apontando para a versão em português quando
+existe, e alguns links complementares de apoio, estão em [docs/links_uteis.md](docs/links_uteis.md).
+
 ## Como o projeto foi criado
 
 Mesmo comando do material de aula, no encontro 1:
