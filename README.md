@@ -25,6 +25,7 @@ estado esperado do código.
 | Tag | Encontro | O que entrou |
 |---|---|---|
 | `aula1` | 1 | Projeto criado pelo template `blank-typescript`, sem alteração de código |
+| `aula2` | 2 | README: caminhos de execução corrigidos e estrutura do projeto comentada; sem alteração de código |
 
 ## Stack
 
@@ -32,7 +33,7 @@ estado esperado do código.
 |---|---|
 | Framework | React Native com Expo (SDK 57) |
 | Linguagem | TypeScript 6, na faixa que o SDK define (`~6.0.3` no `package.json`) |
-| Execução | Expo Go em celular Android; tunnel como caminho principal, USB com `adb reverse` como reserva |
+| Execução | Expo Go em celular Android ou iPhone. No laboratório da turma, por cabo USB com `adb reverse` (a rede bloqueia túneis); em casa, pela rede local ou por um túnel sem conta (cloudflared) |
 | Navegação | React Navigation, a partir do módulo 4 |
 | Dados locais | SQLite via `expo-sqlite`, a partir do módulo 7 |
 | Build | EAS Build na nuvem, gerando APK, no módulo 9 |
@@ -48,12 +49,15 @@ celular: Android com o aplicativo Expo Go compatível com o SDK 57.
 git clone https://github.com/thalsime/uc8-projeto-exemplo.git
 cd uc8-projeto-exemplo
 npm install
-npx expo start --tunnel
+npx expo start
 ```
 
-No Expo Go, toque em **Scan QR** e aponte para o QR Code do terminal. Em casa, com o
-computador e o celular no mesmo Wi-Fi, `npx expo start` sem a opção `--tunnel` basta. O
-caminho por cabo USB e o diagnóstico dos erros mais comuns estão no guia de ambiente
+No Expo Go, toque em **Scan QR** e aponte para o QR Code do terminal. Isso basta quando o
+computador e o celular estão na mesma rede Wi-Fi. Em rede que isola os dois (o caso do
+laboratório), o caminho é o cabo USB, com `adb reverse tcp:8081 tcp:8081` e a variável
+`REACT_NATIVE_PACKAGER_HOSTNAME=127.0.0.1` antes do `npx expo start`. O `--tunnel` do Expo
+não é usado no material: o serviço gratuito por trás dele deixou de ter garantia. O passo a
+passo de cada caminho e o diagnóstico dos erros mais comuns estão no guia de ambiente
 publicado no Classroom da turma.
 
 Verificações que precisam passar antes de cada tag:
@@ -85,9 +89,12 @@ alterados ao abrir o repositório em outra máquina.
 | `app.json` | A configuração do aplicativo |
 | `tsconfig.json` | A configuração do TypeScript |
 | `package.json` | A lista de dependências |
+| `package-lock.json` | A versão exata de cada pacote instalado; vai para o Git |
 | `assets/` | Ícone, tela de abertura e favicon |
 | `node_modules/` | As dependências baixadas, que nunca vão para o Git |
+| `.gitignore` | O que fica fora do Git: `node_modules/`, `.expo/`, `dist/` e arquivos nativos |
+| `AGENTS.md`, `CLAUDE.md`, `.claude/` | Instruções para assistentes de código, do próprio template: pedem a documentação da versão 57 antes de qualquer código. Ficam; não obrigam a usar assistente |
 | `LICENSE` | Licença que veio com o template |
 
-A anatomia completa é assunto do encontro 2, quando o projeto ganha estrutura de pastas e
-o tema: controle de estoque, o mesmo sistema executado na UC5.
+A anatomia foi assunto do encontro 2. O tema do projeto é o controle de estoque, o mesmo
+sistema executado na UC5; o recorte (entidades e telas) entra no encontro 3, em `src/types/`.
