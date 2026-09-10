@@ -26,6 +26,7 @@ estado esperado do código.
 |---|---|---|
 | `aula1` | 1 | Projeto criado pelo template `blank-typescript`, sem alteração de código |
 | `aula2` | 2 | README: caminhos de execução corrigidos e estrutura do projeto comentada; sem alteração de código |
+| `aula3` | 3 | Recorte do sistema definido e as três entidades tipadas em `src/types/entidades.ts` |
 
 ## Stack
 
@@ -97,4 +98,39 @@ alterados ao abrir o repositório em outra máquina.
 | `LICENSE` | Licença que veio com o template |
 
 A anatomia foi assunto do encontro 2. O tema do projeto é o controle de estoque, o mesmo
-sistema executado na UC5; o recorte (entidades e telas) entra no encontro 3, em `src/types/`.
+sistema executado na UC5; o recorte entrou no encontro 3, e está descrito abaixo.
+
+## O recorte, definido no encontro 3
+
+O aplicativo é **uma parte** do sistema da UC5, não o sistema inteiro. O celular mostra e
+edita; a administração fica no desktop.
+
+**Sistema de origem:** o controle de estoque construído na UC5.
+
+**Entidades, e os campos que o aplicativo usa** (`src/types/entidades.ts`):
+
+| Entidade | Campos | Papel |
+|---|---|---|
+| `Produto` | `id`, `nome`, `descricao?`, `categoriaId`, `quantidade` | O centro: é o que o usuário consulta e edita todo dia |
+| `Categoria` | `id`, `nome` | Classifica os produtos; não gera movimento |
+| `Movimentacao` | `id`, `produtoId`, `tipo`, `quantidade`, `data` | Registra entrada e saída, e é o que altera a quantidade |
+
+**As cinco telas:**
+
+1. Lista de produtos, com a quantidade em estoque
+2. Detalhe de um produto
+3. Novo produto
+4. Entrada e saída de estoque
+5. Sobre o aplicativo
+
+**O que fica de fora:** cadastro de usuários e permissões, fornecedores e relatórios
+gerenciais - tudo que é administração, e não consulta ou movimento do dia a dia.
+
+Duas convenções que valem para as entidades desta unidade, e que o arquivo de tipos
+documenta: a relação entre entidades é por **identificador** (`categoriaId`, `produtoId`),
+que é a forma que o SQLite do módulo 7 vai usar; e data é **`string` em ISO 8601**, porque
+em JSON e no SQLite ela vira texto de qualquer maneira - `Date` entra quando houver
+conversão explícita.
+
+O recorte pode mudar ao longo da unidade. Quando mudar, muda aqui e nos tipos, no mesmo
+commit.
