@@ -27,6 +27,7 @@ estado esperado do código.
 | `aula1` | 1 | Projeto criado pelo template `blank-typescript`, sem alteração de código |
 | `aula2` | 2 | README: caminhos de execução corrigidos e estrutura do projeto comentada; sem alteração de código |
 | `aula3` | 3 | Recorte do sistema definido e as três entidades tipadas em `src/types/entidades.ts` |
+| `aula4` | 4 | Carga assíncrona com dados simulados em `src/servicos/produtos.ts` e a verificação de tipo `ehProduto` em `src/utils/guardas.ts` |
 
 ## Stack
 
